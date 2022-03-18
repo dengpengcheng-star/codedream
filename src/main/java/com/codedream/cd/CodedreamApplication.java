@@ -1,4 +1,4 @@
-package com.codedream.codedream;
+package com.codedream.cd;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
