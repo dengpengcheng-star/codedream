@@ -5,12 +5,11 @@
 </template>
 
 <script>
-  export default {
-    name: 'AppIndex'
-  }
+export default {
+  name: 'AppIndex'
+}
 </script>
 
 <style scoped>
 
 </style>
-

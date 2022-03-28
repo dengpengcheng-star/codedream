@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @author DengPengcheng
@@ -28,10 +30,41 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    int id;
+    private int id;
 
-    String username;
-    String password;
+    /**
+     * Username.
+     */
+    @NotEmpty(message = "用户名不能为空")
+    private String username;
+
+    /**
+     * Password.
+     */
+    private String password;
+
+    /**
+     * Salt for encoding.
+     */
+    private String salt;
+
+    /**
+     * Real name.
+     */
+    private String name;
+
+    /**
+     * Phone number.
+     */
+    private String phone;
+
+    /**
+     * Email address.
+     *
+     * A Email address can be null,but should be correct if exists.
+     */
+    @Email(message = "请输入正确的邮箱")
+    private String email;
 
 }
 

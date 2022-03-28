@@ -1,22 +1,20 @@
 package com.codedream.cd.controller;
 
 
-//import com.codedream.cd.controller.utils.UserUtils;
-import com.codedream.cd.intf.DO.Result;
+
+
 import com.codedream.cd.intf.entity.User;
-import com.codedream.cd.intf.serviceI.UserService;
+import com.codedream.cd.intf.result.Result;
+import com.codedream.cd.intf.result.ResultFactory;
+import com.codedream.cd.intf.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @Controller
 public class LoginController extends  BaseController{
@@ -24,18 +22,44 @@ public class LoginController extends  BaseController{
     @Autowired
     UserService userService;
 
-    @CrossOrigin
+//    @CrossOrigin
     @PostMapping(value = "/api/login")
     @ResponseBody
     public Result login(@RequestBody User requestUser) {
+
         String username = requestUser.getUsername();
         username = HtmlUtils.htmlEscape(username);
 
         User user = userService.get(username, requestUser.getPassword());
         if (null == user) {
-            return new Result(400);
+            return ResultFactory.buildFailResult("未登录");
         } else {
-            return new Result(200);
+            return ResultFactory.buildSuccessResult("");
         }
+    }
+    @PostMapping("/api/register")
+    public Result register(@RequestBody User user) {
+        int status = userService.register(user);
+        switch (status) {
+            case 0:
+                return ResultFactory.buildFailResult("用户名和密码不能为空");
+            case 1:
+                return ResultFactory.buildSuccessResult("注册成功");
+            case 2:
+                return ResultFactory.buildFailResult("用户已存在");
+        }
+        return ResultFactory.buildFailResult("未知错误");
+    }
+
+    @GetMapping("/api/logout")
+    public Result logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return ResultFactory.buildSuccessResult("成功登出");
+    }
+
+    @GetMapping("/api/authentication")
+    public String authentication() {
+        return "身份认证成功";
     }
 }

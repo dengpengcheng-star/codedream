@@ -1,16 +1,17 @@
 <template>
   <div>
+    <nav-menu></nav-menu>
     <router-view/>
-    <Video></Video>
   </div>
 
 </template>
 
 <script>
-import Video from './common/Video'
+import NavMenu from './common/NavMenu'
 export default {
   name: 'Home',
-  components: {Video}
+  // eslint-disable-next-line standard/object-curly-even-spacing
+  components: { NavMenu}
 }
 </script>
 

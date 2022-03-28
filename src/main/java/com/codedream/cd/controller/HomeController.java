@@ -2,61 +2,37 @@ package com.codedream.cd.controller;
 
 
 
+import com.codedream.cd.intf.DO.Result;
+import com.codedream.cd.intf.entity.User;
+import com.codedream.cd.intf.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 @Controller
 @RequestMapping("/hello")
 public class HomeController extends  BaseController{
+    @Autowired
+    UserService userService;
 
-//    @Resource
-//    private UserTimeService userTimeService;
-//
-//    //hello
-//    @GetMapping("/index")
-//    public String showHome(Model model , HttpServletRequest request){
-//        String hello = "hello";
-//
-//
-//        model.addAttribute("name1", hello);
-//        model.addAttribute("name2", "allen");
-//
-//        return "hello";
-//
-//    }
-//
-//    @GetMapping("/init")
-//    @ResponseBody
-//    public ResponseDO init(String name, HttpServletRequest request){
-//        System.out.println("init hello , name =" + name);
-//
-//        UserTime time=  userTimeService.loadByName(name);
-//
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("userId", 12);
-//        map.put("userTime",  time);
-//
-//        return new ResponseDO(true, SUCCESS, map);
-//    }
-//
-//    @GetMapping("/getListByUsrId")
-//    @ResponseBody
-//    public ResponseDO getListByUsrId(int userId, HttpServletRequest request){
-//        List<UserTime> list=userTimeService.loadListByUserId(userId);
-//
-//
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("userList",  list);
-//
-//        return new ResponseDO(true, SUCCESS, map);
-//    }
+    @CrossOrigin
+    @PostMapping(value = "/api/index/show")
+    @ResponseBody
+    public Result showPictures(@RequestBody User requestUser) {
+
+        String staticPath=ClassUtils.getDefaultClassLoader().getResource("pictures").getPath();
+
+        String username = requestUser.getUsername();
+        username = HtmlUtils.htmlEscape(username);
+
+        User user = userService.get(username, requestUser.getPassword());
+        if (null == user) {
+            return new Result(400);
+        } else {
+            return new Result(200);
+        }
+    }
+
 }

@@ -22,6 +22,11 @@ export default new Router({
           meta: {
             requireAuth: true
           }
+        },
+        {
+          path: '/library',
+          name: 'Library',
+          component: () => import('../components/library/LibraryIndex')
         }
       ]
     },
