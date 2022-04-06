@@ -6,9 +6,9 @@
     </video>
     <button @click="playClick" :class="{hide: isPlay}">点击播放</button> -->
     <!--class="video-js vjs-default-skin vjs-big-play-centered" -->
-    <video    :preload="preload"
-              :poster="videoImg" :height="height" :width="width" align="center" :controls="controls"  :autoplay="autoplay">
-      <source :src="videoSrc" type="video/mp4">
+    <video    preload="preload" id="videoId"  :src="videoSrc"
+              :poster="videoImg" height="height" width="width" align="center" controls="controls"  autoplay="autoplay">
+
     </video>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   name: 'Play',
   data () {
     return {
-      videoSrc: '../../../../static/video1.mp4',
+      videoSrc: this.$route.params.videoSrc,
       videoImg: '../../../../static/full_res.jpg',
       playStatus: '',
       muteStatus: '',
@@ -31,15 +31,32 @@ export default {
       autoplay: ''
     }
   },
-
+  mounted: function () {
+    this.loadVideos()
+  },
   methods: {
     loadVideos () {
-      const _this = this
-      this.$axios.get('/playVideo').then(resp => {
-        if (resp && resp.data.code === 200) {
-          _this.videoSrc = resp.data.result.videoSrc
-        }
-      })
+      this.videoSrc = this.$route.params.videoSrc
+      const videoV = document.getElementById('videoId')
+      // const source = document.createElement('source')
+      // source.src = this.videoSrc
+      // source.type = 'video/mp4'
+      // videoV.append(source)
+      videoV.src=this.videoSrc
+      console.log(this.videoSrc)
+      // eslint-disable-next-line standard/object-curly-even-spacing
+      // this.$axios({ method: 'get', url: this.videoSrc}).then(
+      //
+      // )
+
+      // document.getElementById('videoId').load()
+      // document.getElementById('videoId').play()
+      // const _this = this
+      // this.$axios.get('/playVideo').then(resp => {
+      //   if (resp && resp.data.code === 200) {
+      //     _this.videoSrc = resp.data.result.videoSrc
+      //   }
+      // })
     }
   }
   // 自动播放属性,muted:静音播放

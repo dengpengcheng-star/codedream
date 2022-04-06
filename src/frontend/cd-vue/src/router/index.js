@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import AppIndex from '../components/home/AppIndex'
 import Login from '../components/Login'
 import Home from '../components/Home'
+import Play from '../components/video/Play'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +35,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/play',
+      name: 'Play',
+      component: Play
     }
   ]
 })

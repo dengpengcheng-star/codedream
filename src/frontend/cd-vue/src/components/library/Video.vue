@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="author">{{item.teacher}}
-            <el-button type="primary" class="el-icon-video-play"  size="mini"></el-button>
+            <el-button type="primary" class="el-icon-video-play"  size="mini" v-on:click="openVideo(item.videoSrc)" :videoSrc="item.videoSrc"></el-button>
           </div>
 
         </el-card>
@@ -79,6 +79,20 @@ export default {
             _this.videos = resp.data.result
           }
         })
+    },
+    openVideo (videoSrc) {
+      console.log(videoSrc)
+      this.$router.push({
+        path: '/play',
+        name: 'Play',
+        params: {
+          videoSrc: videoSrc
+        }
+        /* query: {
+            key: 'key',
+            msgKey: this.msg
+        } */
+      })
     }
   }
 }
