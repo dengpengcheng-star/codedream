@@ -2,8 +2,10 @@ package com.codedream.intf.service;
 
 
 import com.codedream.intf.DAO.AdminPermissionDAO;
+import com.codedream.intf.DAO.AdminRolePermissionDAO;
 import com.codedream.intf.entity.AdminPermission;
 import com.codedream.intf.entity.AdminRole;
+import com.codedream.intf.entity.AdminRolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +18,14 @@ import java.util.stream.Collectors;
 public class AdminPermissionService {
     @Autowired
     AdminPermissionDAO adminPermissionDAO;
-//    @Autowired
-//    AdminUserRoleService adminUserRoleService;
+    @Autowired
+    AdminUserRoleService adminUserRoleService;
     @Autowired
     AdminRoleService adminRoleService;
-//    @Autowired
-//    AdminRolePermissionService adminRolePermissionService;
-//    @Autowired
-//    AdminRolePermissionDAO adminRolePermissionDAO;
+    @Autowired
+    AdminRolePermissionService adminRolePermissionService;
+    @Autowired
+    AdminRolePermissionDAO adminRolePermissionDAO;
     @Autowired
     UserService userService;
 
@@ -46,11 +48,11 @@ public class AdminPermissionService {
         return false;
     }
 
-//    public List<AdminPermission> listPermsByRoleId(int rid) {
-//        List<Integer> pids = adminRolePermissionService.findAllByRid(rid)
-//                .stream().map(AdminRolePermission::getPid).collect(Collectors.toList());
-//        return adminPermissionDAO.findAllById(pids);
-//    }
+    public List<AdminPermission> listPermsByRoleId(int rid) {
+        List<Integer> pids = adminRolePermissionService.findAllByRid(rid)
+                .stream().map(AdminRolePermission::getPid).collect(Collectors.toList());
+        return adminPermissionDAO.findAllById(pids);
+    }
 
     public Set<String> listPermissionURLsByUser(String username) {
         List<Integer> rids = adminRoleService.listRolesByUser(username)

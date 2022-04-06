@@ -2,8 +2,10 @@ package com.codedream.intf.service;
 
 import com.codedream.intf.DAO.AdminRoleDAO;
 
+import com.codedream.intf.entity.AdminMenu;
 import com.codedream.intf.entity.AdminPermission;
 import com.codedream.intf.entity.AdminRole;
+import com.codedream.intf.entity.AdminUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,27 +20,27 @@ public class AdminRoleService {
     AdminRoleDAO adminRoleDAO;
     @Autowired
     UserService userService;
-//    @Autowired
-//    AdminUserRoleService adminUserRoleService;
-//    @Autowired
-//    AdminPermissionService adminPermissionService;
-//    @Autowired
-//    AdminRolePermissionService adminRolePermissionService;
-//    @Autowired
-//    AdminMenuService adminMenuService;
+    @Autowired
+    AdminUserRoleService adminUserRoleService;
+    @Autowired
+    AdminPermissionService adminPermissionService;
+    @Autowired
+    AdminRolePermissionService adminRolePermissionService;
+    @Autowired
+    AdminMenuService adminMenuService;
 
-//    public List<AdminRole> listWithPermsAndMenus() {
-//        List<AdminRole> roles = adminRoleDAO.findAll();
-//        List<AdminPermission> perms;
-//        List<AdminMenu> menus;
-//        for (AdminRole role : roles) {
-//            perms = adminPermissionService.listPermsByRoleId(role.getId());
-//            menus = adminMenuService.getMenusByRoleId(role.getId());
-//            role.setPerms(perms);
-//            role.setMenus(menus);
-//        }
-//        return roles;
-//    }
+    public List<AdminRole> listWithPermsAndMenus() {
+        List<AdminRole> roles = adminRoleDAO.findAll();
+        List<AdminPermission> perms;
+        List<AdminMenu> menus;
+        for (AdminRole role : roles) {
+            perms = adminPermissionService.listPermsByRoleId(role.getId());
+            menus = adminMenuService.getMenusByRoleId(role.getId());
+            role.setPerms(perms);
+            role.setMenus(menus);
+        }
+        return roles;
+    }
 
     public List<AdminRole> findAll() {
         return adminRoleDAO.findAll();

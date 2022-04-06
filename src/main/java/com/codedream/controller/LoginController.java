@@ -72,6 +72,7 @@ public class LoginController {
     }
 
     //访问每个页面前都向后端发送一个请求，目的是经由拦截器验证服务器端的登录状态,防止自建请求
+    @CrossOrigin
     @ResponseBody
     @GetMapping(value = "api/authentication")
     public String authentication(){
