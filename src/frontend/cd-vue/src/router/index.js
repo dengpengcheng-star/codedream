@@ -4,12 +4,20 @@ import AppIndex from '../components/home/AppIndex'
 import Login from '../components/Login'
 import Home from '../components/Home'
 import Play from '../components/video/Play'
+import Register from '../components/Register'
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
     {
+      path1: '/',
+      name1: 'index',
+      redirect1: '/index',
+      component1: AppIndex,
+      meta: {
+        requireAuth: true
+      },
       path: '/home',
       name: 'Home',
       component: Home,
@@ -35,6 +43,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/play',

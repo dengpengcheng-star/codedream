@@ -51,6 +51,7 @@ public class LoginController {
         }
     }
     @PostMapping("/api/register")
+    @ResponseBody
     public Result register(@RequestBody User user) {
         int status = userService.register(user);
         switch (status) {
@@ -65,6 +66,7 @@ public class LoginController {
     }
 
     @GetMapping("/api/logout")
+    @ResponseBody
     public Result logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
