@@ -23,5 +23,5 @@ public class Video {
     Date date;
     String abs;
     String coverSrc;
-    
+    int cid;//目录
 }

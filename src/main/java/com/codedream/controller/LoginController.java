@@ -7,15 +7,21 @@ import com.codedream.intf.entity.User;
 import com.codedream.cool.result.Result;
 import com.codedream.cool.result.ResultFactory;
 import com.codedream.intf.service.UserService;
+
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
+
 
 
 
@@ -24,6 +30,7 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+    protected static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 //    @CrossOrigin
     @PostMapping(value = "/api/login")
@@ -34,6 +41,7 @@ public class LoginController {
         username = HtmlUtils.htmlEscape(username);
 
         Subject subject = SecurityUtils.getSubject();
+        logger.info("middle");
 //        subject.getSession().setTimeout(10000);
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, requestUser.getPassword());
         usernamePasswordToken.setRememberMe(true);
@@ -45,8 +53,10 @@ public class LoginController {
 //            }
             return ResultFactory.buildSuccessResult(username);
         } catch (IncorrectCredentialsException e) {
+            logger.info("error----");
             return ResultFactory.buildFailResult("密码错误");
         } catch (UnknownAccountException e) {
+            logger.info("error----");
             return ResultFactory.buildFailResult("账号不存在");
         }
     }

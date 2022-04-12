@@ -38,7 +38,7 @@ export default{
   },
   methods: {
     login () {
-      var _this = this
+      const _this = this
       this.$axios
         .post('/login', {
           username: this.loginForm.username,
@@ -46,11 +46,14 @@ export default{
         })
         .then(resp => {
           if (resp.data.code === 200) {
-            var data = resp.data.result
+            const data = resp.data.result
             _this.$store.commit('login', data)
-            var path = _this.$route.query.redirect
+            const path = _this.$route.query.redirect
             _this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
+            console.log(resp.data.code)
           } else {
+            console.log(resp.data.code)
+            console.log(resp.data.message)
             this.$alert(resp.data.message, '提示', {
               confirmButtonText: '确定'
             })

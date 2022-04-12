@@ -11,4 +11,8 @@ public interface VideoDAO extends JpaRepository<Video,Integer> {
     List<Video> getAllByDateNotNullOrderByDate();
 
     List<Video> findAllByNameLikeOrAbsLike(String s, String s1);
+
+    List<Video> findAllByCidIs(int cid);
+
+
 }

@@ -48,70 +48,70 @@
 </template>
 
 <script>
-  import ImgUpload from './ImgUpload'
-  export default {
-    name: 'EditForm',
-    components: {ImgUpload},
-    data () {
-      return {
-        dialogFormVisible: false,
-        form: {
+import ImgUpload from './ImgUpload'
+export default {
+  name: 'EditForm',
+  components: {ImgUpload},
+  data () {
+    return {
+      dialogFormVisible: false,
+      form: {
+        id: '',
+        title: '',
+        author: '',
+        date: '',
+        press: '',
+        cover: '',
+        abs: '',
+        cid: '',
+        category: {
           id: '',
-          title: '',
-          author: '',
-          date: '',
-          press: '',
-          cover: '',
-          abs: '',
-          cid: '',
-          category: {
-            id: '',
-            name: ''
-          }
-        },
-        formLabelWidth: '120px'
-      }
-    },
-    methods: {
-      clear () {
-        this.$refs.imgUpload.clear()
-        this.form = {
-          id: '',
-          title: '',
-          author: '',
-          date: '',
-          press: '',
-          cover: '',
-          abs: '',
-          category: {
-            id: '',
-            name: ''
-          }
+          name: ''
         }
       },
-      onSubmit () {
-        this.$axios
-          .post('/admin/content/books', {
-            id: this.form.id,
-            cover: this.form.cover,
-            title: this.form.title,
-            author: this.form.author,
-            date: this.form.date,
-            press: this.form.press,
-            abs: this.form.abs,
-            category: this.form.category
-          }).then(resp => {
-            if (resp && resp.data.code === 200) {
-              this.dialogFormVisible = false
-              this.$emit('onSubmit')
-            }
-        })
-      },
-      uploadImg () {
-        this.form.cover = this.$refs.imgUpload.url
+      formLabelWidth: '120px'
+    }
+  },
+  methods: {
+    clear () {
+      this.$refs.imgUpload.clear()
+      this.form = {
+        id: '',
+        title: '',
+        author: '',
+        date: '',
+        press: '',
+        cover: '',
+        abs: '',
+        category: {
+          id: '',
+          name: ''
+        }
       }
+    },
+    onSubmit () {
+      this.$axios
+        .post('/admin/content/books', {
+          id: this.form.id,
+          cover: this.form.cover,
+          title: this.form.title,
+          author: this.form.author,
+          date: this.form.date,
+          press: this.form.press,
+          abs: this.form.abs,
+          category: this.form.category
+        }).then(resp => {
+          if (resp && resp.data.code === 200) {
+            this.dialogFormVisible = false
+            this.$emit('onSubmit')
+          }
+        })
+    },
+    uploadImg () {
+      this.form.cover = this.$refs.imgUpload.url
     }
   }
+}
 </script>
 
 <style scoped>

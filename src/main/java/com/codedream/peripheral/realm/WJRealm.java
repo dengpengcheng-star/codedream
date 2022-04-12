@@ -49,7 +49,7 @@ public class WJRealm extends AuthorizingRealm {
         }
         String passwordInDB = user.getPassword();
         String salt = user.getSalt();
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userName, passwordInDB, ByteSource.Util.bytes(salt), getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, passwordInDB, ByteSource.Util.bytes(salt), getName());
         return authenticationInfo;
     }
 }

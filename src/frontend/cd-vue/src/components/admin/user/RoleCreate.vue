@@ -28,53 +28,53 @@
 </template>
 
 <script>
-  export default {
-    name: 'RoleCreate',
-    data () {
-      return {
-        dialogFormVisible: false,
-        rules: {
-          name: [{required: true, message: '角色名不能为空', trigger: 'blur'}]
-        },
-        checked: true,
-        roleForm: {
-          name: '',
-          nameZh: ''
-        },
-        loading: false
+export default {
+  name: 'RoleCreate',
+  data () {
+    return {
+      dialogFormVisible: false,
+      rules: {
+        name: [{required: true, message: '角色名不能为空', trigger: 'blur'}]
+      },
+      checked: true,
+      roleForm: {
+        name: '',
+        nameZh: ''
+      },
+      loading: false
+    }
+  },
+  methods: {
+    clear () {
+      this.roleForm = {
+        name: '',
+        nameZh: ''
       }
     },
-    methods: {
-      clear () {
-        this.roleForm = {
-          name: '',
-          nameZh: ''
-        }
-      },
-      createRole () {
-        this.$axios
-          .post('/admin/role', {
-            name: this.roleForm.name,
-            nameZh: this.roleForm.nameZh
-          })
-          .then(resp => {
-            if (resp.data.code === 200) {
-              this.$alert(resp.data.result, '提示', {
-                confirmButtonText: '确定'
-              })
-              this.clear()
-              this.$emit('onSubmit')
-            } else {
-              this.$alert(resp.data.message, '提示', {
-                confirmButtonText: '确定'
-              })
-            }
-          })
-          .catch(failResponse => {})
-        this.dialogFormVisible = false
-      }
+    createRole () {
+      this.$axios
+        .post('/admin/role', {
+          name: this.roleForm.name,
+          nameZh: this.roleForm.nameZh
+        })
+        .then(resp => {
+          if (resp.data.code === 200) {
+            this.$alert(resp.data.result, '提示', {
+              confirmButtonText: '确定'
+            })
+            this.clear()
+            this.$emit('onSubmit')
+          } else {
+            this.$alert(resp.data.message, '提示', {
+              confirmButtonText: '确定'
+            })
+          }
+        })
+        .catch(failResponse => {})
+      this.dialogFormVisible = false
     }
   }
+}
 </script>
 
 <style scoped>

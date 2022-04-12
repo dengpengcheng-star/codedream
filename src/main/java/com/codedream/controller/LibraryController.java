@@ -36,14 +36,14 @@ public class LibraryController {
         }
     }
 
-//    @GetMapping("/api/categories/{cid}/books")
-//    public Result listByCategory(@PathVariable("cid") int cid) {
-//        if (0 != cid) {
-//            return ResultFactory.buildSuccessResult(bookService.listByCategory(cid));
-//        } else {
-//            return ResultFactory.buildSuccessResult(bookService.list());
-//        }
-//    }
+    @GetMapping("/api/categories/{cid}/books")
+    public Result listByCategory(@PathVariable("cid") int cid) {
+        if (0 != cid) {
+            return ResultFactory.buildSuccessResult(videoService.listByCategory(cid));
+        } else {
+            return ResultFactory.buildSuccessResult(videoService.getAllOrderByDate());
+        }
+    }
 
 //    @PostMapping("/api/admin/content/books/covers")
 //    public String coversUpload(MultipartFile file) {

@@ -18,4 +18,8 @@ public class VideoService {
     public List<Video> Search(String keywords) {
         return videoDAO.findAllByNameLikeOrAbsLike('%' + keywords + '%', '%' + keywords + '%');
     }
+
+    public Object listByCategory(int cid) {
+        return videoDAO.findAllByCidIs(cid);
+    }
 }

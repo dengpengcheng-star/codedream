@@ -116,112 +116,112 @@
 </template>
 
 <script>
-  import BulkRegistration from './BulkRegistration'
-    export default {
-      name: 'UserProfile',
-      components: {BulkRegistration},
-      data () {
-          return {
-            users: [],
-            roles: [],
-            dialogFormVisible: false,
-            selectedUser: [],
-            selectedRolesIds: []
-          }
-      },
-      mounted () {
-        this.listUsers()
-        this.listRoles()
-      },
-      computed: {
-        tableHeight () {
-          return window.innerHeight - 320
+import BulkRegistration from './BulkRegistration'
+export default {
+  name: 'UserProfile',
+  components: {BulkRegistration},
+  data () {
+    return {
+      users: [],
+      roles: [],
+      dialogFormVisible: false,
+      selectedUser: [],
+      selectedRolesIds: []
+    }
+  },
+  mounted () {
+    this.listUsers()
+    this.listRoles()
+  },
+  computed: {
+    tableHeight () {
+      return window.innerHeight - 320
+    }
+  },
+  methods: {
+    listUsers () {
+      var _this = this
+      this.$axios.get('/admin/user').then(resp => {
+        if (resp && resp.data.code === 200) {
+          _this.users = resp.data.result
         }
-      },
-      methods: {
-        listUsers () {
-          var _this = this
-          this.$axios.get('/admin/user').then(resp => {
-            if (resp && resp.data.code === 200) {
-              _this.users = resp.data.result
-            }
-          })
-        },
-        listRoles () {
-          var _this = this
-          this.$axios.get('/admin/role').then(resp => {
-            if (resp && resp.data.code === 200) {
-              _this.roles = resp.data.result
-            }
-          })
-        },
-        commitStatusChange (value, user) {
-          if (user.username !== 'admin') {
-            this.$axios.put('/admin/user/status', {
-              enabled: value,
-              username: user.username
-            }).then(resp => {
-              if (resp && resp.data.code === 200) {
-                if (value) {
-                  this.$message('用户 [' + user.username + '] 已启用')
-                } else {
-                  this.$message('用户 [' + user.username + '] 已禁用')
-                }
-              }
-            })
-          } else {
-            user.enabled = true
-            this.$alert('不能禁用管理员账户')
-          }
-        },
-        onSubmit (user) {
-          let _this = this
-          // 根据视图绑定的角色 id 向后端传送角色信息
-          let roles = []
-          for (let i = 0; i < _this.selectedRolesIds.length; i++) {
-            for (let j = 0; j < _this.roles.length; j++) {
-              if (_this.selectedRolesIds[i] === _this.roles[j].id) {
-                roles.push(_this.roles[j])
-              }
-            }
-          }
-          this.$axios.put('/admin/user', {
-            username: user.username,
-            name: user.name,
-            phone: user.phone,
-            email: user.email,
-            roles: roles
-          }).then(resp => {
-            if (resp && resp.data.code === 200) {
-              this.$alert('用户信息修改成功')
-              this.dialogFormVisible = false
-              // 修改角色后重新请求用户信息，实现视图更新
-              this.listUsers()
+      })
+    },
+    listRoles () {
+      var _this = this
+      this.$axios.get('/admin/role').then(resp => {
+        if (resp && resp.data.code === 200) {
+          _this.roles = resp.data.result
+        }
+      })
+    },
+    commitStatusChange (value, user) {
+      if (user.username !== 'admin') {
+        this.$axios.put('/admin/user/status', {
+          enabled: value,
+          username: user.username
+        }).then(resp => {
+          if (resp && resp.data.code === 200) {
+            if (value) {
+              this.$message('用户 [' + user.username + '] 已启用')
             } else {
-              this.$alert(resp.data.message)
+              this.$message('用户 [' + user.username + '] 已禁用')
             }
-          })
-        },
-        editUser (user) {
-          this.dialogFormVisible = true
-          this.selectedUser = user
-          let roleIds = []
-          for (let i = 0; i < user.roles.length; i++) {
-            roleIds.push(user.roles[i].id)
           }
-          this.selectedRolesIds = roleIds
-        },
-        resetPassword (username) {
-          this.$axios.put('/admin/user/password', {
-            username: username
-          }).then(resp => {
-            if (resp && resp.data.code === 200) {
-              this.$alert('密码已重置为 123')
+        })
+      } else {
+        user.enabled = true
+        this.$alert('不能禁用管理员账户')
+      }
+    },
+    onSubmit (user) {
+      let _this = this
+      // 根据视图绑定的角色 id 向后端传送角色信息
+      let roles = []
+      for (let i = 0; i < _this.selectedRolesIds.length; i++) {
+        for (let j = 0; j < _this.roles.length; j++) {
+          if (_this.selectedRolesIds[i] === _this.roles[j].id) {
+            roles.push(_this.roles[j])
           }
-          })
         }
       }
+      this.$axios.put('/admin/user', {
+        username: user.username,
+        name: user.name,
+        phone: user.phone,
+        email: user.email,
+        roles: roles
+      }).then(resp => {
+        if (resp && resp.data.code === 200) {
+          this.$alert('用户信息修改成功')
+          this.dialogFormVisible = false
+          // 修改角色后重新请求用户信息，实现视图更新
+          this.listUsers()
+        } else {
+          this.$alert(resp.data.message)
+        }
+      })
+    },
+    editUser (user) {
+      this.dialogFormVisible = true
+      this.selectedUser = user
+      let roleIds = []
+      for (let i = 0; i < user.roles.length; i++) {
+        roleIds.push(user.roles[i].id)
+      }
+      this.selectedRolesIds = roleIds
+    },
+    resetPassword (username) {
+      this.$axios.put('/admin/user/password', {
+        username: username
+      }).then(resp => {
+        if (resp && resp.data.code === 200) {
+          this.$alert('密码已重置为 123')
+        }
+      })
     }
+  }
+}
 </script>
 
 <style scoped>

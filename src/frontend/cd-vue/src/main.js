@@ -37,12 +37,65 @@ router.beforeEach((to, from, next) => {
 }
 )
 
+// http response 拦截器
+axios.interceptors.response.use(
+  response => {
+    return response
+  },
+  error => {
+    if (error) {
+      store.commit('logout')
+      router.replace('/login')
+    }
+    // 返回接口返回的错误信息
+    return Promise.reject(error)
+  })
+
+const initAdminMenu = (router, store) => {
+  // 防止重复触发加载菜单操作
+  if (store.state.adminMenus.length > 0) {
+    return
+  }
+  axios.get('/menu').then(resp => {
+    if (resp && resp.status === 200) {
+      var fmtRoutes = formatRoutes(resp.data.result)
+      router.addRoutes(fmtRoutes)
+      store.commit('initAdminMenu', fmtRoutes)
+    }
+  })
+}
+
+const formatRoutes = (routes) => {
+  let fmtRoutes = []
+  routes.forEach(route => {
+    if (route.children) {
+      route.children = formatRoutes(route.children)
+    }
+
+    let fmtRoute = {
+      path: route.path,
+      component: resolve => {
+        require(['./components/admin/' + route.component + '.vue'], resolve)
+      },
+      name: route.name,
+      nameZh: route.nameZh,
+      iconCls: route.iconCls,
+      meta: {
+        requireAuth: true
+      },
+      children: route.children
+    }
+    fmtRoutes.push(fmtRoute)
+  })
+  return fmtRoutes
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   render: h => h(App),
   router,
   store,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })
