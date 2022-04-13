@@ -12,14 +12,9 @@ public class VideoService {
     @Autowired
     VideoDAO videoDAO;
 
-    public List<Video> getAllOrderByDate(){
-        return videoDAO.getAllByDateNotNullOrderByDate();
-    }
-    public List<Video> Search(String keywords) {
-        return videoDAO.findAllByNameLikeOrAbsLike('%' + keywords + '%', '%' + keywords + '%');
-    }
 
-    public Object listByCategory(int cid) {
-        return videoDAO.findAllByCidIs(cid);
+
+    public List<Video> listByLecture(int lid) {
+        return videoDAO.findAllByLidIs(lid);
     }
 }

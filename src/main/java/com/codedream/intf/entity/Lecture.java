@@ -5,22 +5,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "video")
+@Table(name = "lecture")
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
-public class Video {
+public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
-    String videoSrc;
+
     String name;
-    Date date;
     String abs;
+    int cid;
+    int teacher_id;
     String coverSrc;
-    int lid;
 }

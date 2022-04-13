@@ -21,7 +21,7 @@ export default {
     listByCategory () {
       const _this = this
       const cid = this.$refs.sideMenu.cid
-      const url = 'categories/' + cid + '/books'
+      const url = 'categories/' + cid + '/lectures'
       this.$axios.get(url).then(resp => {
         if (resp && resp.data.code === 200) {
           _this.$refs.videosArea.videos = resp.data.result

@@ -6,10 +6,10 @@
       <el-tooltip effect="dark" placement="right"
                   v-for="item in videos.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   :key="item.id">
-        <p slot="content" style="font-size: 14px;margin-bottom: 6px;">{{item.title}}</p>
+        <p slot="content" style="font-size: 14px;margin-bottom: 6px;">{{item.name}}</p>
         <p slot="content" style="font-size: 13px;margin-bottom: 6px">
           <span>{{item.teacher}}</span> /
-          <span>{{item.date}}</span> /
+<!--          <span>{{item.date}}</span> /-->
 <!--          <span>{{item.press}}</span>-->
         </p>
         <p slot="content" style="width: 300px" class="abstract">{{item.abs}}</p>
@@ -20,11 +20,11 @@
           </div>
           <div class="info">
             <div class="title">
-              <a href="">{{item.title}}</a>
+              <a href="">{{item.name}}</a>
             </div>
           </div>
           <div class="author">{{item.teacher}}
-            <el-button type="primary" class="el-icon-video-play"  size="mini" v-on:click="openVideo(item.videoSrc)" :videoSrc="item.videoSrc"></el-button>
+            <el-button type="primary" class="el-icon-video-play"  size="mini" v-on:click="openVideo(item.id)" :videoSrc="item.videoSrc"></el-button>
           </div>
 
         </el-card>
@@ -61,7 +61,7 @@ export default {
   methods: {
     loadVideos () {
       const _this = this
-      this.$axios.get('/videos').then(resp => {
+      this.$axios.get('/lectures').then(resp => {
         if (resp && resp.data.code === 200) {
           _this.videos = resp.data.result
         }
@@ -80,13 +80,13 @@ export default {
           }
         })
     },
-    openVideo (videoSrc) {
-      console.log(videoSrc)
+    openVideo (lectureId) {
+      // console.log(lectureId)
       this.$router.push({
         path: '/play',
         name: 'Play',
         params: {
-          videoSrc: videoSrc
+          lectureId: lectureId
         }
         /* query: {
             key: 'key',
