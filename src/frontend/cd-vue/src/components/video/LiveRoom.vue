@@ -2,16 +2,16 @@
   <div>
     <el-row class="tac">
       <el-col :span="12">
-        <h4>students</h4>
+        <h3>students</h3>
+        <h4>total:{{total}}</h4>
+        <h4>online:{{up}}</h4>
         <!--eslint-disable-next-line-->
         <div v-for="student in students" >
-            <p  v-if="student.isUp==='true'">{{student.name}}:{{student.id}}</p>
-            <p v-else>{{student.name}}:{{student.id}}</p>
+            <p  v-if="student.up==='true'" style="color: #2b94ff">{{student.name}}:{{student.id}}</p>
+            <p v-else style="color: #2c3e50">{{student.name}}:{{student.id}}</p>
 
         </div>
 
-
-        </div>
       </el-col>
     </el-row>
     <Live :liveroomIds="liveRoomId"></Live>
@@ -28,7 +28,9 @@ export default {
     return {
       direction: 'rtl',
       liveRoomId: '',
-      students: null
+      students: null,
+      total: 0,
+      up: 0
     }
   },
   mounted: function () {
@@ -53,6 +55,15 @@ export default {
       this.$axios.get(url).then(resp => {
         if (resp && resp.data.code === 200) {
           this.students = resp.data.result
+          let up = 0
+          let total = this.students.length
+          for (let i = 0; i < total; i++) {
+            if (this.students[i].up === 'true') {
+              up = up + 1
+            }
+          }
+          this.total = total
+          this.up = up
         } else {
           alert(resp.data.message)
         }

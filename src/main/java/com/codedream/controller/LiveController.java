@@ -25,6 +25,7 @@ public class LiveController {
     LectureService lectureService;
 
     private SingleLiveMap singleLiveMap=SingleLiveMap.getInstance();
+
     @GetMapping("/api/live/{lid}/up")
     public Result updateLive(@PathVariable("lid") int lid) {
         Subject subject = SecurityUtils.getSubject();
