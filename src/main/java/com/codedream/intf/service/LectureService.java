@@ -21,4 +21,7 @@ public class LectureService {
     public List<Lecture> Search(String keywords) {
         return lectureDAO.findAllByNameLikeOrAbsLike('%' + keywords + '%', '%' + keywords + '%');
     }
+    public Lecture findByIdIs(int id){
+        return lectureDAO.findByIdIs(id);
+    }
 }

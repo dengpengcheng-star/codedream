@@ -39,7 +39,7 @@ public class RecordVideoThread extends Thread {
                     try {
                         outFile.createNewFile();
                     } catch (IOException e) {
-                        
+
                         e.printStackTrace();
                     }
                 }

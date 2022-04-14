@@ -16,4 +16,5 @@ public interface LectureDAO extends JpaRepository<Lecture,Integer> {
 
     List<Lecture> findAllByNameLikeOrAbsLike(String s, String s1);
     List<Lecture> findAll();
+    Lecture findByIdIs(int id);
 }
