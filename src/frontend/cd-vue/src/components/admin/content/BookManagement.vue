@@ -87,73 +87,73 @@
 </template>
 
 <script>
-  import EditForm from './EditForm'
-  export default {
-    name: 'BookManagement',
-    components: {EditForm},
-    data () {
-      return {
-        books: []
-      }
-    },
-    mounted () {
-      this.loadBooks()
-    },
-    computed: {
-      tableHeight () {
-        return window.innerHeight - 320
-      }
-    },
-    methods: {
-      deleteBook (id) {
-        this.$confirm('此操作将永久删除该书籍, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-            this.$axios
-              .post('/admin/content/books/delete', {id: id}).then(resp => {
-              if (resp && resp.data.code === 200) {
-                this.loadBooks()
-              }
-            })
-          }
-        ).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
+import EditForm from './EditForm'
+export default {
+  name: 'BookManagement',
+  components: {EditForm},
+  data () {
+    return {
+      books: []
+    }
+  },
+  mounted () {
+    this.loadBooks()
+  },
+  computed: {
+    tableHeight () {
+      return window.innerHeight - 320
+    }
+  },
+  methods: {
+    deleteBook (id) {
+      this.$confirm('此操作将永久删除该书籍, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$axios
+          .post('/admin/content/books/delete', {id: id}).then(resp => {
+            if (resp && resp.data.code === 200) {
+              this.loadBooks()
+            }
           })
-        })
-      },
-      editBook (item) {
-        this.$refs.edit.dialogFormVisible = true
-        this.$refs.edit.form = {
-          id: item.id,
-          cover: item.cover,
-          title: item.title,
-          author: item.author,
-          date: item.date,
-          press: item.press,
-          abs: item.abs,
-          category: {
-            id: item.category.id.toString(),
-            name: item.category.name
-          }
-        }
-        // this.$refs.edit.category = {
-        //   id: item.category.id.toString()
-        // }
-      },
-      loadBooks () {
-        var _this = this
-        this.$axios.get('/books').then(resp => {
-          if (resp && resp.data.code === 200) {
-            _this.books = resp.data.result
-          }
-        })
       }
+      ).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    editBook (item) {
+      this.$refs.edit.dialogFormVisible = true
+      this.$refs.edit.form = {
+        id: item.id,
+        cover: item.cover,
+        title: item.title,
+        author: item.author,
+        date: item.date,
+        press: item.press,
+        abs: item.abs,
+        category: {
+          id: item.category.id.toString(),
+          name: item.category.name
+        }
+      }
+      // this.$refs.edit.category = {
+      //   id: item.category.id.toString()
+      // }
+    },
+    loadBooks () {
+      var _this = this
+      this.$axios.get('/books').then(resp => {
+        if (resp && resp.data.code === 200) {
+          _this.books = resp.data.result
+        }
+      })
     }
   }
+}
 </script>
 
 <style scoped>

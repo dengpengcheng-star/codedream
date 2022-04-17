@@ -6,31 +6,31 @@
     active-text-color="red">
     <el-menu-item index="0">
       <i class="el-icon-menu"></i>
-      <span slot="title">全部</span>
+      <span slot="title">All</span>
     </el-menu-item>
     <el-menu-item index="1">
       <i class="el-icon-menu"></i>
-      <span slot="title">计算机</span>
+      <span slot="title">JAVA      </span>
     </el-menu-item>
     <el-menu-item index="2">
       <i class="el-icon-menu"></i>
-      <span slot="title">艺术</span>
+      <span slot="title">JAVASCRIPT</span>
     </el-menu-item>
     <el-menu-item index="3">
       <i class="el-icon-menu"></i>
-      <span slot="title">文学</span>
+      <span slot="title">ANDROID   </span>
     </el-menu-item>
     <el-menu-item index="4">
       <i class="el-icon-menu"></i>
-      <span slot="title">科学</span>
+      <span slot="title">PYTHON    </span>
     </el-menu-item>
     <el-menu-item index="5">
       <i class="el-icon-menu"></i>
-      <span slot="title">经管</span>
+      <span slot="title">SPRING    </span>
     </el-menu-item>
     <el-menu-item index="6">
       <i class="el-icon-menu"></i>
-      <span slot="title">科技</span>
+      <span slot="title">USEFULSKILL</span>
     </el-menu-item>
   </el-menu>
 </template>

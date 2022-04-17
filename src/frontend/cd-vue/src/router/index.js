@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AppIndex from '../components/home/AppIndex'
-import Login from '../components/Login'
+import Login from '../components/login/Login'
 import Home from '../components/Home'
 import Play from '../components/video/Play'
-import Register from '../components/Register'
+import Register from '../components/login/Register'
 import Live from '../components/video/Live'
 Vue.use(Router)
 
@@ -59,6 +59,25 @@ export default new Router({
       path: '/play',
       name: 'Play',
       component: Play
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import('../components/admin/AdminIndex'),
+      meta: {
+        requireAuth: true
+      }
+      //,
+      // children: [
+      //   {
+      //     path: '/admin/dashboard',
+      //     name: 'Dashboard',
+      //     component: () => import('../components/admin/dashboard/admin/index'),
+      //     meta: {
+      //       requireAuth: true
+      //     }
+      //   }
+      // ]
     }
   ]
 })
@@ -103,12 +122,12 @@ export const createRouter = routes => new Router({
     {
       path: '/login',
       name: 'Login',
-      component: () => import('../components/Login')
+      component: () => import('../components/login/Login')
     },
     {
       path: '/register',
       name: 'Register',
-      component: () => import('../components/Register')
+      component: () => import('../components/login/Register')
     },
     {
       path: '/admin',

@@ -60,6 +60,7 @@ public class ShiroConfiguration {
         return securityManager;
     }
 
+    @Bean
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());

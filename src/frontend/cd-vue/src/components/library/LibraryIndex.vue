@@ -5,7 +5,7 @@
       <SideMenu @indexSelect="listByCategory" ref="sideMenu"></SideMenu>
     </el-aside>
     <el-main>
-      <videos class="videos-area" ref="booksArea"></videos>
+      <videos class="videos-area" ref="videosArea"></videos>
     </el-main>
   </el-container>
 </template>

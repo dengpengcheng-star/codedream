@@ -28,9 +28,9 @@ export default {
   data () {
     return {
       navList: [
-        {name: '/index', navItem: '首页'},
-        {name: '/library', navItem: '分类馆'},
-        {name: '/admin', navItem: '个人中心'}
+        {name: '/index', navItem: 'Index'},
+        {name: '/library', navItem: 'Library'},
+        {name: '/admin', navItem: 'Admin'}
       ]
     }
   },

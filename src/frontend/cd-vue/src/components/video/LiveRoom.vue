@@ -35,14 +35,15 @@ export default {
   },
   mounted: function () {
     window.addEventListener(this, 'unload', e => this.unloadHandler(e))
-    this.up()
+    this.setUp()
   },
   destroyed () {
     // window.removeEventListener('beforeunload', e => this.beforeunloadHandler(e))
     window.removeEventListener(this, 'unload', e => this.unloadHandler(e))
   },
   methods: {
-    up () {
+
+    setUp () {
       const url = '/live/' + this.liveRoomId + '/up'
       this.$axios.get(url)
     },
