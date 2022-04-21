@@ -8,7 +8,8 @@ import java.util.List;
 
 
 public interface AdminMenuDAO extends JpaRepository<AdminMenu, Integer> {
-     AdminMenu findById(int id);
-     List<AdminMenu> findAllByParentId(int parentId);
+     AdminMenu findByIdIs(int id);
+//     List<AdminMenu> findAllByParentId(int parentId);
+//     List<AdminMenu> findAllById(int parentId);
 }
 

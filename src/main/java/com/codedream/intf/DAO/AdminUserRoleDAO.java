@@ -11,6 +11,6 @@ import java.util.List;
  * @date 2019/11
  */
 public interface AdminUserRoleDAO extends JpaRepository<AdminUserRole,Integer> {
-    List<AdminUserRole> findAllByUid(int uid);
+    AdminUserRole findByUid(int uid);
     void deleteAllByUid(int uid);
 }

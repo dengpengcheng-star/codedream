@@ -17,7 +17,8 @@
 
 <script>
 import AdminMenu from './AdminMenu'
-import Header from './Header'
+import Header from '../common/Header'
+
 
 export default {
   name: 'AdminIndex',
@@ -28,9 +29,10 @@ export default {
     }
   },
   mounted () {
-    // this.$router.replace('/admin/dashboard')
+
   }
 }
+
 </script>
 
 <style scoped>

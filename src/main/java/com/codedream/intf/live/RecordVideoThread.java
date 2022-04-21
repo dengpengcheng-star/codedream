@@ -82,7 +82,7 @@ public class RecordVideoThread extends Thread {
     public static void main(String[] args) {
         RecordVideoThread thread = new RecordVideoThread();
         thread.setFilePath("D:/testOne.flv");
-        thread.setStreamURL("rtmp://ip:端口/live/home");
+        thread.setStreamURL("rtmp://csi420-01-vm7.ucd.ie:1935/live/hello");
         thread.start();
     }
 }

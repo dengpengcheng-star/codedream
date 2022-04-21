@@ -5,7 +5,7 @@ import Login from '../components/login/Login'
 import Home from '../components/Home'
 import Play from '../components/video/Play'
 import Register from '../components/login/Register'
-import Live from '../components/video/Live'
+
 Vue.use(Router)
 
 export default new Router({
@@ -39,9 +39,9 @@ export default new Router({
           component: () => import('../components/library/LibraryIndex')
         },
         {
-          path: '/live',
-          name: 'Live',
-          component: Live
+          path: '/liveInfo',
+          name: 'LiveInfo',
+          component: () => import('../components/live/LiveInfo')
         }
       ]
     },
@@ -67,17 +67,7 @@ export default new Router({
       meta: {
         requireAuth: true
       }
-      //,
-      // children: [
-      //   {
-      //     path: '/admin/dashboard',
-      //     name: 'Dashboard',
-      //     component: () => import('../components/admin/dashboard/admin/index'),
-      //     meta: {
-      //       requireAuth: true
-      //     }
-      //   }
-      // ]
+
     }
   ]
 })
@@ -116,6 +106,10 @@ export const createRouter = routes => new Router({
           path: '/library',
           name: 'Library',
           component: () => import('../components/library/LibraryIndex')
+        }, {
+          path: '/liveInfo',
+          name: 'LiveInfo',
+          component: () => import('../components/live/LiveInfo')
         }
       ]
     },
@@ -147,9 +141,10 @@ export const createRouter = routes => new Router({
         }
       ]
     },
+
     {
       path: '*',
-      component: () => import('../components/pages/Error404')
+      component: () => import('../components/home/Error404')
     }
   ]
 })

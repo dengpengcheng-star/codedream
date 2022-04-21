@@ -50,7 +50,7 @@ public class AdminMenu {
     /**
      * Parent menu.
      */
-    private int parentId;
+    private Integer parentId;
 
     /**
      * Transient property for storing children menus.

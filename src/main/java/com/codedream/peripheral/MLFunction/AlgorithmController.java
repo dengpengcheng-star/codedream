@@ -1,4 +1,4 @@
-package com.codedream.MLFunction;
+package com.codedream.peripheral.MLFunction;
 
 import com.codedream.cool.result.Result;
 import com.codedream.cool.result.ResultFactory;

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header></Header>
   <div class="yj-txt">
     <!--
     <video :src="videoSrc" :poster="videoImg" :autoplay="playStatus" height="421" width="700" :muted="muteStatus">
@@ -15,11 +16,11 @@
   </div>
 
   <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
-    点我打开
+    open
   </el-button>
 
   <el-drawer
-    title="我是标题"
+    title="title"
     :visible.sync="drawer"
     :direction="direction"
     :before-close="handleClose">
@@ -33,8 +34,10 @@
 </template>
 
 <script>
+import Header from '../common/Header'
 export default {
   name: 'Play',
+  components: {Header},
   data () {
     return {
       videoSrc: '',

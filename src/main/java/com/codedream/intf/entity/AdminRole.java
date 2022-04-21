@@ -38,11 +38,11 @@ public class AdminRole {
     private boolean enabled;
 
 
-    /**
-     * Transient property for storing permissions owned by current role.
-     */
-    @Transient
-    private List<AdminPermission> perms;
+//    /**
+//     * Transient property for storing permissions owned by current role.
+//     */
+//    @Transient
+//    private List<AdminPermission> perms;
 
     /**
      * Transient property for storing menus owned by current role.

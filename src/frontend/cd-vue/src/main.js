@@ -20,6 +20,10 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 
 router.beforeEach((to, from, next) => {
+  if (store.state.username && to.path.startsWith('/admin')) {
+    initAdminMenu(router, store)
+
+  }
   if (to.meta.requireAuth) {
     if (store.state.user) {
       axios.get('/authentication').then(resp => {
@@ -58,8 +62,9 @@ const initAdminMenu = (router, store) => {
   }
   axios.get('/menu').then(resp => {
     if (resp && resp.status === 200) {
-      var fmtRoutes = formatRoutes(resp.data.result)
+      const fmtRoutes = formatRoutes(resp.data.result)
       router.addRoutes(fmtRoutes)
+      console.log(resp.data.result)
       store.commit('initAdminMenu', fmtRoutes)
     }
   })

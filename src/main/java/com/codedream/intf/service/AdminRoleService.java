@@ -3,7 +3,7 @@ package com.codedream.intf.service;
 import com.codedream.intf.DAO.AdminRoleDAO;
 
 import com.codedream.intf.entity.AdminMenu;
-import com.codedream.intf.entity.AdminPermission;
+//import com.codedream.intf.entity.AdminPermission;
 import com.codedream.intf.entity.AdminRole;
 import com.codedream.intf.entity.AdminUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +22,25 @@ public class AdminRoleService {
     UserService userService;
     @Autowired
     AdminUserRoleService adminUserRoleService;
-    @Autowired
-    AdminPermissionService adminPermissionService;
-    @Autowired
-    AdminRolePermissionService adminRolePermissionService;
+//    @Autowired
+//    AdminPermissionService adminPermissionService;
+//    @Autowired
+//    AdminRolePermissionService adminRolePermissionService;
     @Autowired
     AdminMenuService adminMenuService;
 
-    public List<AdminRole> listWithPermsAndMenus() {
-        List<AdminRole> roles = adminRoleDAO.findAll();
-        List<AdminPermission> perms;
-        List<AdminMenu> menus;
-        for (AdminRole role : roles) {
-            perms = adminPermissionService.listPermsByRoleId(role.getId());
-            menus = adminMenuService.getMenusByRoleId(role.getId());
-            role.setPerms(perms);
-            role.setMenus(menus);
-        }
-        return roles;
-    }
+//    public List<AdminRole> listWithPermsAndMenus() {
+//        List<AdminRole> roles = adminRoleDAO.findAll();
+//        List<AdminPermission> perms;
+//        List<AdminMenu> menus;
+//        for (AdminRole role : roles) {
+//            perms = adminPermissionService.listPermsByRoleId(role.getId());
+//            menus = adminMenuService.getMenusByRoleId(role.getId());
+//            role.setPerms(perms);
+//            role.setMenus(menus);
+//        }
+//        return roles;
+//    }
 
     public List<AdminRole> findAll() {
         return adminRoleDAO.findAll();
@@ -51,11 +51,10 @@ public class AdminRoleService {
         adminRoleDAO.save(adminRole);
     }
 
-    public List<AdminRole> listRolesByUser(String username) {
+    public AdminRole listRolesByUser(String username) {
         int uid = userService.findByUsername(username).getId();
-        List<Integer> rids = adminUserRoleService.listAllByUid(uid)
-                .stream().map(AdminUserRole::getRid).collect(Collectors.toList());
-        return adminRoleDAO.findAllById(rids);
+        AdminUserRole rids = adminUserRoleService.getByUid(uid);
+        return adminRoleDAO.findById(rids.getRid());
     }
 
     public AdminRole updateRoleStatus(AdminRole role) {

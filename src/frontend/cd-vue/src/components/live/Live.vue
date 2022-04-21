@@ -69,7 +69,7 @@ import 'vue-video-player/src/custom-theme.css'
 import videoPlayer from 'vue-video-player'
 import 'videojs-contrib-hls'
 import 'videojs-flash'
-import VBarrage from './VBarrage/index.vue'
+import VBarrage from '../video/VBarrage'
 
 const chatData = [
   {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,8 +18,8 @@ public class AdminUserRoleService {
     @Autowired
     AdminUserRoleDAO adminUserRoleDAO;
 
-    public List<AdminUserRole> listAllByUid(int uid) {
-        return adminUserRoleDAO.findAllByUid(uid);
+    public AdminUserRole getByUid(int uid) {
+        return adminUserRoleDAO.findByUid(uid);
     }
 
 //    @Modifying
@@ -34,4 +35,6 @@ public class AdminUserRoleService {
         });
         adminUserRoleDAO.saveAll(urs);
     }
+
+
 }
