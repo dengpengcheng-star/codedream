@@ -4,6 +4,7 @@ package com.codedream.controller;
 import com.codedream.cool.result.Result;
 import com.codedream.cool.result.ResultFactory;
 import com.codedream.intf.entity.Lecture;
+import com.codedream.intf.service.CourseFinalService;
 import com.codedream.intf.service.LectureService;
 import com.codedream.intf.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,15 @@ public class LibraryController {
     VideoService videoService;
     @Autowired
     LectureService lectureService;
-
+    @Autowired
+    CourseFinalService courseFinalService;
     @GetMapping("/api/lectures")
     public Result listLectures() {
-        return ResultFactory.buildSuccessResult(lectureService.getAll());
+        return ResultFactory.buildSuccessResult(
+                courseFinalService.getAll());
+//                lectureService.getAll());
     }
+
 
 //    @PostMapping("/api/admin/content/videos")
 //    public Result addOrUpdateBooks(@RequestBody @Valid Video video) {
@@ -34,9 +39,14 @@ public class LibraryController {
     @GetMapping("/api/search")
     public Result searchResult(@RequestParam("keywords") String keywords) {
         if ("".equals(keywords)) {
-            return ResultFactory.buildSuccessResult(lectureService.getAll());
+            return ResultFactory.buildSuccessResult(
+                    //lectureService.getAll()
+                    courseFinalService.getAll());
         } else {
-            return ResultFactory.buildSuccessResult(lectureService.Search(keywords));
+            return ResultFactory.buildSuccessResult(
+                    courseFinalService.Search(keywords));
+//                    lectureService.Search(keywords)
+        //);
         }
     }
 

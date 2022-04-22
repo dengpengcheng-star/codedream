@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NavMenu from './common/NavMenu'
+import NavMenu from '../common/NavMenu'
 export default {
   name: 'Home',
   // eslint-disable-next-line standard/object-curly-even-spacing

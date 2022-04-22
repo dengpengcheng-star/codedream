@@ -11,11 +11,9 @@ import com.codedream.intf.service.LectureService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -67,6 +65,11 @@ public class LiveController {
             }
         }return ResultFactory.buildSuccessResult(classInfoList);
 
+
+    }
+    @PostMapping("/api/getLiveRoom")
+    public Result getLiveRoom(@RequestBody HashMap<String, String> map) {
+        return ResultFactory.buildFailResult("no such liveRoom");
     }
     /**
 

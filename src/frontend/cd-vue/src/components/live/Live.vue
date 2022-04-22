@@ -4,13 +4,13 @@
       <!-- 直播间信息区 -->
       <div class="live" :style="liveHeight">
         <div class="live-avatar">
-          <a-avatar shape="square" :size="84" v-if="liveRoomInfo" :src="imageUrl + liveRoomInfo.anchorPhoto" />
+          <icon shape="square" :size="84" v-if="liveRoomInfo" :src="imageUrl + liveRoomInfo.anchorPhoto" />
           <div style="margin-left: 10px;" v-if="liveRoomInfo">
             <p style="font-size: 18px;">
               <b>{{ liveRoomInfo.liveroom.recordList[0].liveroomTitle }}</b>
             </p>
             <p>
-              <a-icon type="user" />
+              <icon type="user" />
               {{ liveRoomInfo.anchorName }}
             </p>
           </div>
@@ -39,7 +39,7 @@
         </div>
         <!-- 操作区 -->
         <div class="live-button">
-          <a-button type="dashed">强制下播</a-button>
+          <button type="dashed">强制下播</button>
           <!-- <select style="margin:0px 12px;" v-model="bulletChat.direction">
             <option value="default">默认</option>
             <option value="top">顶部</option>
@@ -47,18 +47,18 @@
         </div>
       </div>
       <!-- 弹幕区 -->
-      <div class="chat" :style="liveHeight">
-        <a-list item-layout="horizontal" :data-source="chatData" :split="false">
-          <a-list-item slot="renderItem" slot-scope="item, index">
-            <a-list-item-meta>
-              <span slot="description">
-                <span style="color: #2b94ff;">{{ item.name }}:</span>
-                <span style="margin-left: 5px;color: #000000;">{{ item.content }}</span>
-              </span>
-            </a-list-item-meta>
-          </a-list-item>
-        </a-list>
-      </div>
+<!--      <div class="chat" :style="liveHeight">-->
+<!--        <list item-layout="horizontal" :data-source="chatData" :split="false">-->
+<!--          <list-item slot="renderItem" slot-scope="item, index">-->
+<!--            <list-item-meta>-->
+<!--              <span slot="description">-->
+<!--                <span style="color: #2b94ff;">{{ item.name }}:</span>-->
+<!--                <span style="margin-left: 5px;color: #000000;">{{ item.content }}</span>-->
+<!--              </span>-->
+<!--            </list-item-meta>-->
+<!--          </list-item>-->
+<!--        </list>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -66,10 +66,16 @@
 <script>
 import 'video.js/dist/video-js.css'
 import 'vue-video-player/src/custom-theme.css'
-import videoPlayer from 'vue-video-player'
+// import { videoPlayer } from 'vue-video-player'
 import 'videojs-contrib-hls'
 import 'videojs-flash'
-import VBarrage from '../video/VBarrage'
+import VBarrage from './VBarrage/index.vue'
+import {videoPlayer} from 'vue-video-player/dist/ssr'
+
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/index.css'
+import Vue from 'vue'
+Vue.use(Avue)
 
 const chatData = [
   {
@@ -107,7 +113,7 @@ export default {
         sources: [
           {
             type: ['application/x-mpegURL', 'rtmp/flv', 'video/x-flv', 'rtmp/mp4'], // 视频流协议，如果是hls，需要后端开启跨域
-            src: '' // 拉流地址
+            src: 'rtmp://csi420-01-vm7.ucd.ie:1935/live/hello' // 拉流地址
           }
         ],
         autoplay: true, // 自动播放

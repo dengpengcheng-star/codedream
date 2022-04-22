@@ -6,9 +6,9 @@
       <el-tooltip effect="dark" placement="right"
                   v-for="item in videos.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   :key="item.id">
-        <p slot="content" style="font-size: 14px;margin-bottom: 6px;">{{item.name}}</p>
+        <p slot="content" style="font-size: 14px;margin-bottom: 6px;">{{item.courseName}}</p>
         <p slot="content" style="font-size: 13px;margin-bottom: 6px">
-          <span>{{item.teacher}}</span> /
+          <span>{{item.id}}</span> /
 <!--          <span>{{item.date}}</span> /-->
 <!--          <span>{{item.press}}</span>-->
         </p>
@@ -16,15 +16,15 @@
         <el-card style="width: 135px;margin-bottom: 20px;height: 233px;float: left;margin-right: 15px" class="book"
                  bodyStyle="padding:10px" shadow="hover">
           <div class="cover">
-            <img :src="item.coverSrc" alt="封面">
+            <img :src="item.picSrc" alt="封面">
           </div>
           <div class="info">
             <div class="title">
-              <a href="">{{item.name}}</a>
+              <a href="">{{item.id}}</a>
             </div>
           </div>
-          <div class="author">{{item.teacher}}
-            <el-button type="primary" class="el-icon-video-play"  size="mini" v-on:click="openVideo(item.id)" :videoSrc="item.videoSrc"></el-button>
+          <div class="author">{{item.id}}
+            <el-button type="primary" class="el-icon-video-play"  size="mini" v-on:click="openVideo(1)" :videoSrc="item.videoSrc"></el-button>
           </div>
 
         </el-card>

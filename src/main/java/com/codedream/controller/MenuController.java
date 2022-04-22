@@ -3,6 +3,7 @@ package com.codedream.controller;
 import com.codedream.cool.result.Result;
 import com.codedream.cool.result.ResultFactory;
 import com.codedream.intf.service.AdminMenuService;
+import com.codedream.intf.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class MenuController {
     @Autowired
     AdminMenuService adminMenuService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/api/menu")
     public Result menu() {

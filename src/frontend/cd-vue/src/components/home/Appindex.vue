@@ -12,13 +12,15 @@
 
 <!--<style scoped>-->
 
-<!--</style>-->
+<!--</style">-->
 <template>
   <div>
     <i :class="buttonState" style="font-size: 25px;" v-on:click="getRecommend()"></i>
-    <el-carousel indicator-position="outside" class="el-carousel" type="card" height="500px">
+    <el-carousel indicator-position="outside" class="el-carousel" type="card" height="500px" >
       <el-carousel-item v-for="lecture in lectures" :key="lecture.name">
-        <el-image :src="lecture.coverSrc" ></el-image>
+        <div>Recommend</div>
+        <el-image :src="lecture.picSrc" style="width:500px;height:400px" v-on:click="openVideo(lecture.id)"></el-image>
+        <div>{{lecture.courseName}}</div>
       </el-carousel-item>
     </el-carousel>
 
@@ -49,6 +51,20 @@ export default {
           }
           this.buttonState = 'el-icon-refresh'
         })
+    },
+    openVideo (lectureId) {
+      // console.log(lectureId)
+      this.$router.push({
+        path: '/play',
+        name: 'Play',
+        params: {
+          lectureId: lectureId
+        }
+        /* query: {
+            key: 'key',
+            msgKey: this.msg
+        } */
+      })
     }
   }
 }
@@ -67,7 +83,7 @@ export default {
 }
 
 .el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+  background-color: #bfbfbf;
 }
 
 .el-carousel__item:nth-child(2n+1) {

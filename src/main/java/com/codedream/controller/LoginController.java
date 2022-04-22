@@ -54,10 +54,10 @@ public class LoginController {
             return ResultFactory.buildSuccessResult(username);
         } catch (IncorrectCredentialsException e) {
             logger.info("error----");
-            return ResultFactory.buildFailResult("密码错误");
+            return ResultFactory.buildFailResult("password is error");
         } catch (UnknownAccountException e) {
             logger.info("error----");
-            return ResultFactory.buildFailResult("账号不存在");
+            return ResultFactory.buildFailResult("Account is not exists");
         }
     }
     @PostMapping("/api/register")
@@ -66,13 +66,13 @@ public class LoginController {
         int status = userService.register(user);
         switch (status) {
             case 0:
-                return ResultFactory.buildFailResult("用户名和密码不能为空");
+                return ResultFactory.buildFailResult("username and password can not be empty");
             case 1:
-                return ResultFactory.buildSuccessResult("注册成功");
+                return ResultFactory.buildSuccessResult("success");
             case 2:
-                return ResultFactory.buildFailResult("用户已存在");
+                return ResultFactory.buildFailResult("The user is already exits");
         }
-        return ResultFactory.buildFailResult("未知错误");
+        return ResultFactory.buildFailResult("Error");
     }
 
     @GetMapping("/api/logout")

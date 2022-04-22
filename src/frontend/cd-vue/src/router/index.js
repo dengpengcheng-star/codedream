@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AppIndex from '../components/home/AppIndex'
 import Login from '../components/login/Login'
-import Home from '../components/Home'
+import Home from '../components/home/Home'
 import Play from '../components/video/Play'
 import Register from '../components/login/Register'
+import LiveRoom from '../components/live/LiveRoom'
+import UserMannagement from '../components/admin/UserCenter'
 
 Vue.use(Router)
 
@@ -68,6 +70,16 @@ export default new Router({
         requireAuth: true
       }
 
+    },
+    {
+      path: '/live',
+      name: 'LiveRoom',
+      component: LiveRoom
+    },
+    {
+      path: '/userCenter',
+      name: 'UserCenter',
+      component: UserMannagement
     }
   ]
 })
@@ -94,14 +106,14 @@ export const createRouter = routes => new Router({
           name: 'AppIndex',
           component: () => import('../components/home/AppIndex')
         },
-        {
-          path: '/admin/content/editor',
-          name: 'Editor',
-          component: () => import('../components/admin/content/ArticleEditor'),
-          meta: {
-            requireAuth: true
-          }
-        },
+        // {
+        //   path: '/admin/content/editor',
+        //   name: 'Editor',
+        //   component: () => import('../components/admin/content/ArticleEditor'),
+        //   meta: {
+        //     requireAuth: true
+        //   }
+        // },
         {
           path: '/library',
           name: 'Library',

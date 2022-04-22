@@ -22,13 +22,32 @@
   <el-drawer
     title="title"
     :visible.sync="drawer"
-    :direction="direction"
-    :before-close="handleClose">
-    <div v-for="video1 in videos" >
-    <el-link onclick="changeVideo(video1.videoSrc)">{{video1.name}}</el-link>
-    </div>
+    :direction="direction">
+<!--    :before-close="handleClose">-->
 
-    <span>我来啦!</span>
+
+      <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+          label="name"
+          width="180">
+          <template slot-scope="scope">
+<!--            <i class="el-icon-time"></i>-->
+            <span style="margin-left: 10px">{{ scope.row.name }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="play">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="changeVideo(scope.$index, scope.row)">play</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+
+<!--    <el-link v-on:click="changeVideo(video1.videoSrc)">{{video1.name}}</el-link>-->
+
   </el-drawer>
   </div>
 </template>
@@ -55,7 +74,8 @@ export default {
       drawer: false,
       direction: 'rtl',
       videos: null,
-      lectureId: ''
+      lectureId: '',
+      tableData: []
     }
   },
   mounted: function () {
@@ -64,30 +84,12 @@ export default {
   methods: {
     loadVideos () {
       this.lectureId = this.$route.params.lectureId
-      // const videoV = document.getElementById('videoId')
-      // // const source = document.createElement('source')
-      // // source.src = this.videoSrc
-      // // source.type = 'video/mp4'
-      // // videoV.append(source)
-      // videoV.src = this.videoSrc
-      // console.log(this.videoSrc)
-      // eslint-disable-next-line standard/object-curly-even-spacing
-      // this.$axios({ method: 'get', url: this.videoSrc}).then(
-      //
-      // )
-
-      // document.getElementById('videoId').load()
-      // document.getElementById('videoId').play()
-      // const _this = this
-      // this.$axios.get('/playVideo').then(resp => {
-      //   if (resp && resp.data.code === 200) {
-      //     _this.videoSrc = resp.data.result.videoSrc
-      //   }
-      // })
-      this.$axios.get('/lectures/' + this.lectureId + '/videos').then(resp => {
+      this.$axios.get('/playVideo/' + this.lectureId + '/on')
+      this.$axios.get('/lectures/' + 1 + '/videos').then(resp => {
         if (resp && resp.data.code === 200) {
           this.videos = resp.data.result
           console.log(this.lectureId)
+          this.tableData = resp.data.result
           this.videoSrc = this.videos[0].videoSrc
           console.log(this.videoSrc)
         } else {
@@ -96,14 +98,14 @@ export default {
       })
     },
     handleClose (done) {
-      this.$confirm('Confirm close？')
-        .then(_ => {
-          done()
-        })
-        .catch(_ => {})
+      // this.$confirm('Confirm close？')
+      //   .then(_ => {
+      //     done()
+      //   })
+      //   .catch(_ => {})
     },
-    changeVideo (videoSrc) {
-      this.videoSrc = videoSrc
+    changeVideo (index, row) {
+      this.videoSrc = row.videoSrc
     }
   }
   // 自动播放属性,muted:静音播放
@@ -119,6 +121,9 @@ export default {
   display: inline-block;
   padding-left: 40px;
   margin-top: 30px;
+
+}
+.vSrc{
 
 }
 /*播放器样式*/

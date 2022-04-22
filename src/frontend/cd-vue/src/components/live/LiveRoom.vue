@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header></Header>
     <el-row class="tac">
       <el-col :span="12">
         <h3>students</h3>
@@ -14,16 +15,19 @@
 
       </el-col>
     </el-row>
-    <Live :liveroomIds="liveRoomId"></Live>
+    <LiveVideo ></LiveVideo>
+<!--    :liveroomIds="liveRoomId"-->
   </div>
 
 </template>
 
 <script>
-import Live from './Live'
+// import Live from './Live'
+import LiveVideo from './LiveVideo'
+import Header from '../common/Header'
 export default {
   name: 'LiveRoom',
-  components: {Live},
+  components: {Header, LiveVideo},
   data () {
     return {
       direction: 'rtl',

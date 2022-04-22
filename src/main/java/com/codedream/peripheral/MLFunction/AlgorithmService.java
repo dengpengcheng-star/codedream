@@ -1,9 +1,11 @@
 package com.codedream.peripheral.MLFunction;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.List;
 
 public interface AlgorithmService {
 
-    public List recGet(MLRequest mlRequest);
+    public int[] recGet(int id);
 
 }
