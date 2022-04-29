@@ -14,13 +14,12 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path1: '/',
-      name1: 'index',
-      redirect1: '/index',
-      component1: AppIndex,
-      meta: {
-        requireAuth: true
-      },
+      path: '/',
+      name: 'Default',
+      redirect: '/home',
+      component: Home
+    },
+    {
       path: '/home',
       name: 'Home',
       component: Home,

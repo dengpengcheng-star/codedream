@@ -15,15 +15,16 @@ public class MyWebConfigurer implements WebMvcConfigurer {
         //所有请求都允许跨域，使用这种配置方法就不能在 interceptor 中再配置 header 了
         registry.addMapping("/**")
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:8080")
+                .allowedOrigins("*")
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .allowedHeaders("*")
                 .maxAge(3600);
-    }
 
+    }
+//"d:/workspace/img/
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/api/file/**").addResourceLocations("file:" + "d:/workspace/img/");
+        registry.addResourceHandler("/api/file/**").addResourceLocations("file:" + "/home/student/project/static");
     }
 
     @Bean

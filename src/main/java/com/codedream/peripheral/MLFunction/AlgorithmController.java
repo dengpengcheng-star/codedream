@@ -38,8 +38,9 @@ public class AlgorithmController {
 
 
         User user = userService.findByUsername(username);
+        logger.info(String.valueOf(user.getId()));
         int[] ids=algoritmService.recGet(user.getId());
-//logger.info(data.toString());
+
         return ResultFactory.buildSuccessResult(courseFinalService.getCourseFinalList(ids));
     }
 }

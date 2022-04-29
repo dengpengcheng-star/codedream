@@ -50,18 +50,26 @@ public class LibraryController {
         }
     }
 
-    @GetMapping("/api/categories/{cid}/lectures")
-    public Result listByCategory(@PathVariable("cid") int cid) {
-        if (0 != cid) {
-            return ResultFactory.buildSuccessResult(lectureService.listByCategory(cid));
-        } else {
-            return ResultFactory.buildSuccessResult(lectureService.getAll());
-        }
-    }
+//    @GetMapping("/api/categories/{cid}/lectures")
+//    public Result listByCategory(@PathVariable("cid") int cid) {
+//        if (0 != cid) {
+//            return ResultFactory.buildSuccessResult(lectureService.listByCategory(cid));
+//        } else {
+//            return ResultFactory.buildSuccessResult(lectureService.getAll());
+//        }
+//    }
     @GetMapping("/api/lectures/{lid}/videos")
     public Result listByLecture(@PathVariable("lid") int lid) {
         if (0 != lid) {
             return ResultFactory.buildSuccessResult(videoService.listByLecture(lid));
+        } else {
+            return ResultFactory.buildFailResult("lectureId is wrong");
+        }
+    }
+    @GetMapping("/api/categories/{idi}/lectures")
+    public Result orderById(@PathVariable("idi") int lid) {
+        if (0 != lid) {
+            return ResultFactory.buildSuccessResult(courseFinalService.findByIdI(lid));
         } else {
             return ResultFactory.buildFailResult("lectureId is wrong");
         }

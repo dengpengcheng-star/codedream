@@ -2,13 +2,13 @@
   <div>
     <el-row style="height: 840px;">
       <search-bar @onSearch="searchResult" ref="searchBar"></search-bar>
-      <view-switch class="switch"></view-switch>
+<!--      <view-switch class="switch"></view-switch>-->
       <el-tooltip effect="dark" placement="right"
                   v-for="item in videos.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   :key="item.id">
-        <p slot="content" style="font-size: 14px;margin-bottom: 6px;">{{item.courseName}}</p>
+        <p slot="content" style="font-size: 14px;margin-bottom: 6px;">name:{{item.courseName}}</p>
         <p slot="content" style="font-size: 13px;margin-bottom: 6px">
-          <span>{{item.id}}</span> /
+          <span>id:{{item.id}}</span> /
 <!--          <span>{{item.date}}</span> /-->
 <!--          <span>{{item.press}}</span>-->
         </p>
@@ -20,11 +20,14 @@
           </div>
           <div class="info">
             <div class="title">
-              <a href="">{{item.id}}</a>
+              <a href="" style="font-size: 25px;">{{item.id}}</a>
+              <i class="el-icon-video-play" v-on:click="openVideo(1)" style="font-size: 25px;"></i>
             </div>
           </div>
-          <div class="author">{{item.id}}
-            <el-button type="primary" class="el-icon-video-play"  size="mini" v-on:click="openVideo(1)" :videoSrc="item.videoSrc"></el-button>
+          <div class="author">
+<!--            id:{{item.id}}-->
+
+<!--            <el-button type="primary" class="el-icon-video-play"  size="mini" v-on:click="openVideo(1)" :videoSrc="item.videoSrc"></el-button>-->
           </div>
 
         </el-card>

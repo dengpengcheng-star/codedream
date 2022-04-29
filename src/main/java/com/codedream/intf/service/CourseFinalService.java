@@ -25,6 +25,11 @@ public class CourseFinalService {
     }
 
     public List<CourseFinal> Search(String keywords) {
-        return courseFinalDAO.findAllByCourseNameLike(keywords);
+        return courseFinalDAO.findAllByCourseNameLike('%' + keywords + '%');
+    }
+
+    public List<CourseFinal> findByIdI(int lid) {
+
+        return courseFinalDAO.findAllByIdBetweenOrderByIdAsc(lid*100-100,lid*100-1);
     }
 }

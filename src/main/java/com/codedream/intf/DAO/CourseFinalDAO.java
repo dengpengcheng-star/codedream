@@ -13,4 +13,5 @@ import java.util.List;
 public interface CourseFinalDAO  extends JpaRepository<CourseFinal,Integer> {
     CourseFinal findByIdIs(int id);
     List<CourseFinal> findAllByCourseNameLike(String s);
+    List<CourseFinal> findAllByIdBetweenOrderByIdAsc(int start,int end);
 }
